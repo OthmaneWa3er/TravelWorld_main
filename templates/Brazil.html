@@ -1,0 +1,466 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Brazil</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Travello template project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+    <link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/about.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/about_responsive.css' %}">
+    <style>/* Reset some default styles */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 0px;
+        }
+        
+        /* Gallery container */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0 -5px;
+        }
+        
+        /* Individual card styling */
+        .card {
+            width: calc(33.333% - 10px);
+            margin: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-radius: 5px;
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .card:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+        
+        .card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .card:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Responsive breakpoints */
+        @media (max-width: 992px) {
+            .card {
+                width: calc(50% - 10px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .card {
+                width: calc(100% - 10px);
+            }
+        }</style>
+</head>
+<body>
+
+
+    <div class="super_container">
+	
+        <!-- Header -->
+    
+        <header class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                            <div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
+                                <div class="logo"><a href="..">Travel World</a></div>
+                                <nav class="main_nav">
+                                    <ul class="d-flex flex-row align-items-start justify-content-start">
+                                        <li><a href="..">Home</a></li>
+                                        <li><a href="accounts/about">About Us</a></li>
+                                        <li><a href="accounts/news">News</a></li>
+                                        <li><a href="accounts/contact">Contact</a></li>
+    
+                                        {% if user.is_authenticated %}
+                                            <li><a href="accounts/logout">Logout</a></li>
+                                        {% else %}
+                                            <li><a href="accounts/register">Register</a></li>
+                                            <li class="active"><a href="accounts/login">Login</a></li>
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                                {% if user.is_authenticated %}
+                                    <div class="header_phone ml-auto">Welcome, {{user.first_name}}</div>
+                                {% else %}
+                                    <div class="header_phone ml-auto">
+                                        <a style="color: white; font-size:xx-large;" href="https://www.instagram.com/keystone_873/" target="_blank">
+                                            <i class="fa fa-instagram" aria-hidden="false"></i>
+                                        </a>
+                                    </div>
+                                {% endif %}
+    
+                                <!-- Hamburger -->
+    
+                                <div class="hamburger ml-auto">
+                                    <i class="fa fa-bars" aria-hidden="true"></i>
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header_social d-flex flex-row align-items-center justify-content-start">
+                <ul class="d-flex flex-row align-items-start justify-content-start">
+                    <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+        </header>
+    
+        <!-- Menu -->
+    
+        <div class="menu">
+            <div class="menu_header d-flex flex-row align-items-center justify-content-start">
+                <div class="menu_logo"><a href="..">Travel World</a></div>
+                <div class="menu_close_container ml-auto"><div class="menu_close"><div></div><div></div></div></div>
+            </div>
+            <div class="menu_content">
+                <ul>
+                    <li><a href="..">Home</a></li>
+                    <li><a href="about">About Us</a></li>
+                    <li><a href="news">News</a></li>
+                    <li><a href="contact">Contact</a></li>
+    
+                    {% if user.is_authenticated %}
+                        <li><a href="logout">Logout</a></li>
+                    {% else %}
+                        <li><a href="register">Register</a></li>
+                        <li class="active"><a href="login">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="menu_social">
+                {% if user.is_authenticated %}
+                    <div class="menu_phone ml-auto">Logged in: {{user.first_name}} {{user.last_name}}</div>
+                {% else %}
+                    <div class="menu_phone ml-auto">Call us: 00-56 445 678 33</div>
+                    <ul class="d-flex flex-row align-items-start justify-content-start">
+                        <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Home -->
+    
+        <div class="home">
+            <div class="background_image" style="background-image:url({% static 'images/brazil9.jpg' %})"></div>
+        </div>
+    
+    <!--About-->      
+    <div class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <div class="section_subtitle">simply amazing places</div>
+                    <div class="section_title"><h2>About Brazil</h2></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- ****** -->
+
+    <div class="gallery">
+        <figure class="card">
+            <img
+                src="{% static 'images\brazil5.jpg' %}"
+                alt="Lakeview Elegance preview"
+            >
+        </figure>
+        <figure class="card">
+            <img
+                src="{% static 'images\brazil6.jpg' %}"
+                alt="Skyline Oasis preview"
+            >
+        </figure>
+        <figure class="card">
+            <img
+                src="{% static 'images\brazil8.jpg' %}"
+                alt="Vista Paradiso preview"
+            >
+        </figure>
+    </div>
+    <div class="about_content" style="margin-top: 90px;" >
+        <div class="about_text">
+            <div class="text_highlight">  </div>
+            <p>Brazil, a country of unparalleled diversity and splendor, beckons the intrepid traveler with open arms. Imagine standing in awe before the towering statue of Christ the Redeemer, the breathtaking backdrop of Rio de Janeiro sprawling below as you soak in the spiritual essence of this iconic landmark. Or perhaps you're drawn to the vibrant streets of Salvador, where the infectious sounds of berimbau and atabaque invite you to join the dance of Capoeira, a mesmerizing blend of martial arts and music that tells the story of Brazil's rich African heritage.
+
+                Venture beyond the urban landscapes and you'll find yourself in the embrace of nature's grandeur. The Amazon rainforest, a treasure trove of biodiversity, offers a symphony of sights and sounds that will awaken your senses. Glide along its mysterious rivers, encountering creatures that have roamed these ancient waters for millennia. And when you reach the thundering Iguazu Falls, feel the mist on your face as you stand before one of the most awe-inspiring natural wonders of the world.
+                
+                Brazil's coastline, the longest in South America, boasts some of the most beautiful beaches on the planet. From the famous Copacabana and Ipanema to the secluded paradises of Jericoacoara and Fernando de Noronha, each stretch of sand offers its own unique charm. Whether you're surfing the world-class waves, basking in the sun, or exploring the marine life beneath the azure waters, Brazil's coastal allure is impossible to resist.
+                
+                </p>
+        </div>
+    </div>   
+    <!--prices--> 
+    <div class="why" style="margin-bottom: 50px; margin-top: 90px;">
+        <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'images/brazil11.jpg' %}" data-speed="0.8"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <div class="section_title"><h2>About prices?</h2></div>
+                </div>
+            </div>
+            <div class="row why_row">
+                
+                <!-- Why item -->
+                <div class="col-lg-4 why_col">
+                    <div class="why_item">
+                        <div class="why_image">
+                            <img src="{% static 'images\brazil13.jpg' %}" alt="">
+                        </div>
+                        <div class="why_content text-center">
+                            <div class="why_title">Amazon Jungle</div>
+                            <div class="why_text">
+                                <strong> Embark on a guided tour at the Ipanema River Guest House.</strong>
+                                <p>2-4 days. Small group. Pickup available.With a guide<br>From 2499 MAD (per person)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Why item -->
+                <div class="col-lg-4 why_col">
+                    <div class="why_item">
+                        <div class="why_image">
+                            <img src="{% static 'images/brazil12.jpg' %}" alt="">
+                        </div>
+                        <div class="why_content text-center">
+                            <div class="why_title">Rio de Janeiro Boat Tour</div>
+                            <div class="why_text">
+                                <strong>Rio de Janeiro: Arraial do Cabo Boat Tour with Lunch</strong>
+                                <p>14 hours. Small group. Pickup available . With a guide<br>From 585 MAD (per person)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Why item -->
+                <div class="col-lg-4 why_col">
+                    <div class="why_item">
+                        <div class="why_image">
+                            <img src="{% static 'images/brazil14.jpg' %}" alt="">
+                        </div>
+                        <div class="why_content text-center">
+                            <div class="why_title">Maracana Stadium</div>
+                            <div class="why_text">
+                                <strong>Visit the great Maracana Stadium and enjoy a match of the national team</strong>
+                                <p>Integrated entrance ticket with a tour in the stadium museum with a guide<br>From 399 MAD (per person)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+ 	<!-- Footer -->
+
+     <footer class="footer">
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'images/footer_1.jpg' %}" data-speed="0.8"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="newsletter">
+						<div class="newsletter_title_container text-center">
+							<div class="newsletter_title">Let us take you Away</div>
+							<div class="newsletter_subtitle">Join our Community NOW!</div>
+						</div>
+						<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter Subscription</title>
+    <style>
+        .newsletter_form_container {
+            margin: 20px;
+        }
+        .newsletter_input {
+            margin: 5px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .newsletter_button {
+            padding: 10px 20px;
+            color: white;
+            background-color: brown;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="newsletter_form_container">
+    <form action="#" class="newsletter_form d-flex flex-md-row flex-column align-items-start justify-content-between" id="newsletter_form">
+        <div class="d-flex flex-md-row flex-column align-items-start justify-content-between">
+            <div>
+                <input type="text" class="newsletter_input newsletter_input_name" id="newsletter_input_name" placeholder="Name" required="required">
+                <div class="input_border"></div>
+            </div>
+            <div>
+                <input type="email" class="newsletter_input newsletter_input_email" id="newsletter_input_email" placeholder="Your e-mail" required="required">
+                <div class="input_border"></div>
+            </div>
+        </div>
+        <div>
+            <button type="submit" style="background-color: brown;" class="newsletter_button">Subscribe</button>
+        </div>
+    </form>
+    <div id="message" class="message" style="display: none;"></div>
+</div>
+
+<script>
+    document.getElementById('newsletter_form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const name = document.getElementById('newsletter_input_name').value;
+        const email = document.getElementById('newsletter_input_email').value;
+        const messageDiv = document.getElementById('message');
+
+        if (name && email) {
+            messageDiv.textContent = Thank you for subscribing, ${name}! We will send updates to ${email}.;
+            messageDiv.style.display = 'block';
+        } else {
+            messageDiv.textContent = 'Please fill in both fields.';
+            messageDiv.style.display = 'block';
+        }
+    });
+</script>
+
+</body>
+</html>
+
+					</div>
+				</div>
+			</div>
+			<div class="row footer_contact_row">
+				<div class="col-xl-10 offset-xl-1">
+					<div class="row">
+
+						<!-- Footer Contact Item -->
+						<div class="col-xl-4 footer_contact_col">
+							<div class="footer_contact_item d-flex flex-column align-items-center justify-content-start text-center">
+								<div class="footer_contact_icon"><img src="{% static 'images/sign.svg' %}" alt=""></div>
+								<div class="footer_contact_title">give us a call</div>
+								<div class="footer_contact_list">
+									<ul>
+										<li>Office : +212-522-543170</li>
+										<li>Mobile: 06-45-62-11-55</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<!-- Footer Contact Item -->
+						<div class="col-xl-4 footer_contact_col">
+							<div class="footer_contact_item d-flex flex-column align-items-center justify-content-start text-center">
+								<div class="footer_contact_icon"><img src="{% static 'images/trekking.svg' %}" alt=""></div>
+								<div class="footer_contact_title">come & drop by</div>
+								<div class="footer_contact_list">
+									<ul style="max-width:190px">
+										<li>105 Rue Al Bakri </li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<!-- Footer Contact Item -->
+						<div class="col-xl-4 footer_contact_col">
+							<div class="footer_contact_item d-flex flex-column align-items-center justify-content-start text-center">
+								<div class="footer_contact_icon"><img src="{% static 'images/around.svg' %}" alt=""></div>
+								<div class="footer_contact_title">send us a message</div>
+								<div class="footer_contact_list">
+									<ul>
+										<li>TravelWorld@gmail.com</li>
+										<li>TravelWorld@emsi-edu.ma</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="background-color: black;" class="col text-center"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Emsi &copy;<script>document.write(new Date().getFullYear());</script>  This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://instagram.com/keystone_873" target="_blank">emsi-edu</a> | Credits:<a href="https://colorlib.com/" target="_blank"> Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> </div>
+	</footer>
+</div>
+
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+<script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'plugins/scrollTo/jquery.scrollTo.min.js' %}"></script>
+<script src="{% static 'plugins/easing/easing.js' %}"></script>
+<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+
+</body>
+
+</html>
